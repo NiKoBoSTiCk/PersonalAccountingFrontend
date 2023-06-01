@@ -12,13 +12,13 @@ import { MatOptionModule } from "@angular/material/core";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { LoginComponent } from "./components/login/login.component";
-import { MessagesComponent } from "./components/message/message.component";
+import { MessageComponent } from "./components/message/message.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MessagesComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
