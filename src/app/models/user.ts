@@ -1,8 +1,10 @@
 export class User {
+  token: string;
+  id: number;
   username: string;
   email: string;
 
-  constructor(username:string, email:string) {
-    this.username = username; this.email = email;
+  constructor(id:number, token:string, username:string, email:string) {
+    this.id = id; this.token = token; this.username = username; this.email = email;
   }
 }

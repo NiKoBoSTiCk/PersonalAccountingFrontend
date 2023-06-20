@@ -9,6 +9,6 @@ export class Document {
   amount:number;
 
   constructor(id:number, user:User, tag:Tag, description:string, amount:number ) {
-    this.id = id; this.user = user; this.tag = tag, this.description = description; this.amount = amount;
+    this.id = id; this.user = user; this.tag = tag; this.description = description; this.amount = amount;
   }
 }

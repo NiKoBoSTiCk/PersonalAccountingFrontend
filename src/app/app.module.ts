@@ -13,12 +13,14 @@ import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { LoginComponent } from "./components/login/login.component";
 import { MessageComponent } from "./components/message/message.component";
+import { SignupComponent } from "./components/signup/signup.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MessageComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

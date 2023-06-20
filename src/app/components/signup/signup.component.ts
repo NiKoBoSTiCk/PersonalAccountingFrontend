@@ -14,7 +14,7 @@ export class SignupComponent implements OnInit {
     password: null
   };
   isSuccessful = false;
-  isSignUpFailed = false;
+  isSignupFailed = false;
   errorMessage = '';
 
   constructor(private authService: AuthService) { }
@@ -28,11 +28,11 @@ export class SignupComponent implements OnInit {
     this.authService.register(username, email, password).subscribe({
       next: () => {
         this.isSuccessful = true;
-        this.isSignUpFailed = false;
+        this.isSignupFailed = false;
       },
       error: (err) => {
         this.errorMessage = err.message;
-        this.isSignUpFailed = true;
+        this.isSignupFailed = true;
       }
     });
   }
