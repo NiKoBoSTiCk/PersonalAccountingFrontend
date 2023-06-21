@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth/auth.service";
 import {TokenStorageService} from "../../services/token-storage/token-storage.service";
+import {User} from "../../models/user";
 
 
 @Component({
@@ -28,14 +29,27 @@ export class SignupComponent implements OnInit {
 
   onSubmit(): void {
     const { username, email, password } = this.form;
-
+    this.showSpinner = true;
+    this.isSignupFailed = false;
     this.authService.signup(username, email, password).subscribe({
-      next: () => {
-        this.isSignupFailed = true;
-        this.isLoggedIn = true;
-      },
-      error: () => {
-        this.isSignupFailed = false;
+      next: (data) => {
+        try {
+          let user = new User(
+            data.token,
+            data.id,
+            data.username,
+            data.email
+          );
+          this.tokenStorage.saveToken(user.token);
+          this.tokenStorage.saveUser(user);
+          this.isSignupFailed = false;
+          this.isLoggedIn = true;
+          window.location.reload();
+          return;
+        } catch (error) {
+          this.isSignupFailed = true;
+          this.showSpinner = false;
+        }
       }
     });
   }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { TokenStorageService } from '../../services/token-storage/token-storage.service';
 import {User} from "../../models/user";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +16,6 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   showSpinner = false;
-  currentUser: any;
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
@@ -28,28 +26,29 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    const { email, password } = this.form;
     this.showSpinner = true;
-    this.authService.login(this.form.email, this.form.password).subscribe({
+    this.isLoginFailed = false;
+    this.authService.login(email, password).subscribe({
         next: (data) => {
-          this.currentUser = new User(
-            data.token,
-            data.id,
-            data.username,
-            data.email
-          );
-          this.tokenStorage.saveToken(this.currentUser.token);
-          this.tokenStorage.saveUser(this.currentUser);
-          this.isLoginFailed = false;
-          this.isLoggedIn = true;
-          window.location.reload();
-          return;
-        },
-        error: () => {
-          this.isLoginFailed = true;
-          this.showSpinner = false;
+          try {
+            let user = new User(
+              data.token,
+              data.id,
+              data.username,
+              data.email
+            );
+            this.tokenStorage.saveToken(user.token);
+            this.tokenStorage.saveUser(user);
+            this.isLoginFailed = false;
+            this.isLoggedIn = true;
+            window.location.reload();
+            return;
+          } catch (error) {
+            this.isLoginFailed = true;
+            this.showSpinner = false;
+          }
         }
     });
-    this.isLoginFailed = true;
-    this.showSpinner = false;
   }
 }

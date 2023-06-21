@@ -23,7 +23,7 @@
       <mat-spinner [style.display]="showSpinner? 'block' : 'none'"></mat-spinner>
     </mat-card-content>
 
-    <div *ngIf="isLoginFailed">
+    <div *ngIf="isLoginFailed && !isLoggedIn">
       Login Failed!
     </div>
 
