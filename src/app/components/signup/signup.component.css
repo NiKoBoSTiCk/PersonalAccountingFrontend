@@ -1,0 +1,11 @@
+.main-div{
+  top:20%;
+  width:100%;
+  text-align:center;
+  position:fixed;
+}
+
+.mat-card{
+  margin:0 auto;
+  display:inline-block;
+}

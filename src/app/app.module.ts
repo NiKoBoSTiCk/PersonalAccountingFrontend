@@ -14,6 +14,12 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { LoginComponent } from "./components/login/login.component";
 import { MessageComponent } from "./components/message/message.component";
 import { SignupComponent } from "./components/signup/signup.component";
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatListModule } from "@angular/material/list";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatButtonModule } from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -33,7 +39,13 @@ import { SignupComponent } from "./components/signup/signup.component";
     MatSelectModule,
     MatOptionModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatListModule,
+    MatSlideToggleModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],

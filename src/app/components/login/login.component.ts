@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { TokenStorageService } from '../../services/token-storage/token-storage.service';
 import {User} from "../../models/user";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   };
   isLoggedIn = false;
   isLoginFailed = false;
-  errorMessage = '';
+  showSpinner = false;
   currentUser: any;
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
@@ -27,9 +28,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { email, password } = this.form;
-
-    this.authService.login(email, password).subscribe({
+    this.showSpinner = true;
+    this.authService.login(this.form.email, this.form.password).subscribe({
         next: (data) => {
           this.currentUser = new User(
             data.token,
@@ -41,16 +41,15 @@ export class LoginComponent implements OnInit {
           this.tokenStorage.saveUser(this.currentUser);
           this.isLoginFailed = false;
           this.isLoggedIn = true;
-          this.reloadPage();
+          window.location.reload();
+          return;
         },
-        error: (err) => {
-          this.errorMessage = err.error.message;
+        error: () => {
           this.isLoginFailed = true;
+          this.showSpinner = false;
         }
     });
-  }
-
-  reloadPage(): void {
-    window.location.reload();
+    this.isLoginFailed = true;
+    this.showSpinner = false;
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth/auth.service";
+import {TokenStorageService} from "../../services/token-storage/token-storage.service";
 
 
 @Component({
@@ -13,26 +14,28 @@ export class SignupComponent implements OnInit {
     email: null,
     password: null
   };
-  isSuccessful = false;
+  isLoggedIn = false;
   isSignupFailed = false;
-  errorMessage = '';
+  showSpinner = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+    }
   }
 
   onSubmit(): void {
     const { username, email, password } = this.form;
 
-    this.authService.register(username, email, password).subscribe({
+    this.authService.signup(username, email, password).subscribe({
       next: () => {
-        this.isSuccessful = true;
-        this.isSignupFailed = false;
-      },
-      error: (err) => {
-        this.errorMessage = err.message;
         this.isSignupFailed = true;
+        this.isLoggedIn = true;
+      },
+      error: () => {
+        this.isSignupFailed = false;
       }
     });
   }

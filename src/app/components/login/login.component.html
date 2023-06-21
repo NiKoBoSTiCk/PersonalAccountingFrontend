@@ -1,68 +1,38 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <form
-      *ngIf="!isLoggedIn"
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input
-          type="text"
-          class="form-control"
-          name="email"
-          [(ngModel)]="form.email"
-          required
-          #email="ngModel"
-        />
-        <div
-          class="alert alert-danger"
-          role="alert"
-          *ngIf="email.errors && f.submitted"
-        >
-          Username is required!
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-        />
-        <div
-          class="alert alert-danger"
-          role="alert"
-          *ngIf="password.errors && f.submitted"
-        >
-          <div *ngIf="password.errors.required">Password is required</div>
-          <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
-        </div>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">
-          Login
-        </button>
-      </div>
-      <div class="form-group">
-        <div
-          class="alert alert-danger"
-          role="alert"
-          *ngIf="f.submitted && isLoginFailed"
-        >
-          Login failed: {{ errorMessage }}
-        </div>
-      </div>
-    </form>
+<div class="main-div">
+  <mat-card *ngIf="!isLoggedIn" class="mat-card" color="primary">
 
-    <div class="alert alert-success" *ngIf="isLoggedIn">
-      Loggen in
+    <mat-card-header class="mat-card-header">
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="mat-card-content">
+      <form name="form" #f="ngForm"> <table>
+        <tr> <td>
+          <mat-form-field class="mat-form-field">
+            <input matInput placeholder="Email" [(ngModel)]="form.email" type="email" name="email" required>
+          </mat-form-field>
+        </td> </tr>
+
+        <tr> <td>
+          <mat-form-field class="mat-form-field">
+            <input matInput placeholder="Password" [(ngModel)]="form.password" type="password" name="password" required>
+          </mat-form-field>
+        </td> </tr>
+      </table> </form>
+
+      <mat-spinner [style.display]="showSpinner? 'block' : 'none'"></mat-spinner>
+    </mat-card-content>
+
+    <div *ngIf="isLoginFailed">
+      Login Failed!
     </div>
-  </div>
+
+    <mat-card-actions class="mat-card-actions">
+      <button mat-raised-button (click)="f.form.valid && onSubmit()" color="primary">Login</button>
+      <mat-label [routerLink]="['/signup']" color="primary">or Signup</mat-label>
+    </mat-card-actions>
+
+  </mat-card>
 </div>
+
+

@@ -1,25 +1,16 @@
 <div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">Personal Accounting App</a>
-
-    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-      <li class="nav-item">
-        <a href="/signup" class="nav-link" routerLink="signup">Signup</a>
-      </li>
-      <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Login</a>
-      </li>
-    </ul>
-
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-      <li class="nav-item">
-        <a href="/documents" class="nav-link" routerLink="documents">Documents</a>
-      </li>
-      <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">Logout</a>
-      </li>
-    </ul>
-  </nav>
+  <mat-toolbar color="primary">
+    <span>Personal Accounting App</span>
+    <div class="spacer"></div>
+    <div *ngIf="!isLoggedIn">
+      <a mat-button href="/login" routerLink="login">Login</a>
+      <a mat-button href="/signup" routerLink="signup">Signup</a>
+    </div>
+    <div *ngIf="isLoggedIn">
+        <a mat-button href="/documents" routerLink="documents">Documents</a>
+        <a mat-button (click)="logout()">Logout</a>
+    </div>
+  </mat-toolbar>
 
   <div class="container">
     <router-outlet></router-outlet>
