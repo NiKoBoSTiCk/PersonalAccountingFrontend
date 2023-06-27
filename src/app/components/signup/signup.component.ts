@@ -36,9 +36,9 @@ export class SignupComponent implements OnInit {
         try {
           let user = new User(
             data.token,
-            data.id,
             data.username,
-            data.email
+            data.email,
+            data.tokenType
           );
           this.tokenStorage.saveToken(user.token);
           this.tokenStorage.saveUser(user);

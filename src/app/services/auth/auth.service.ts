@@ -9,7 +9,7 @@ import { MessageService } from "../message/message.service";
 })
 export class AuthService {
 
-  private authUrl = 'http://172.22.160.101:4000/auth';
+  private authUrl = 'http://172.28.175.170:4000/api/auth';
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 

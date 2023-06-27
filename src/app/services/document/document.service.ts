@@ -1,63 +1,83 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { MessageService } from "../message/message.service";
 import { Observable, of } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { Document } from "../../models/document";
+import { DocumentInfo } from "../../models/documentInfo";
+import { DocumentFile } from "../../models/documentFile";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DocumentService {
 
-  private documentUrl = 'http://172.22.160.101:4000/document/';
+  private documentUrl = 'http://172.28.175.170:4000/api/documents';
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
-  addDocument(title:string, username:string): Observable<any>{
-    return this.http.post(this.documentUrl,
-      {
-        title: title,
-        username: username
-      })
-      .pipe(
-        catchError(this.handleError('addDocument'))
-      );
+  addDocument(docInfo: DocumentInfo, docFile: DocumentFile): Observable<any> {
+    const data: FormData = new FormData();
+    data.append("docFile", docFile.file, docFile.filename)
+    data.append("docInfo", JSON.stringify(docInfo))
+    return this.http.post(this.documentUrl, data, {
+        reportProgress: true,
+        responseType: 'text'
+    });
   }
 
-  deleteDocument(title:string, username:string): Observable<any>{
-    return this.http.delete(this.documentUrl, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-      body: {
-        title: title,
-        username: username
-      },
-    }).pipe(
+  deleteDocument(id: number): Observable<any>{
+    return this.http.delete(this.documentUrl + "?id=" + id).pipe(
       catchError(this.handleError('deleteDocument'))
     );
   }
 
-  updateDocument(title:string, username:string, status:string, progress:number,  score:number, comment:string): Observable<any>{
-    return this.http.put(this.documentUrl, {
-      title: title,
-      username: username,
-      progress: progress,
-      status: status,
-      score: score,
-      comment: comment
+  updateDocument(docInfo: DocumentInfo, docFile?: DocumentFile): Observable<any> {
+    const data: FormData = new FormData();
+    data.append("docInfo", JSON.stringify(docInfo))
+    if (docFile != null)
+      data.append("docFile", docFile.file, docFile.filename)
+    return this.http.put(this.documentUrl, data, {
+      reportProgress: true,
+      responseType: 'text'
     }).pipe(
       catchError(this.handleError('updateDocument'))
     );
   }
 
-  getDocument(username:string): Observable<Document[]> {
-    return this.http.get<Document[]>(
-      this.documentUrl + username)
-      .pipe(
-        catchError(this.handleError<Document[]>('getDocument', []))
-      );
+  getDocument(id: number): Observable<DocumentFile> {
+    return this.http.get<DocumentFile>(this.documentUrl + "?id=" + id).pipe(
+      catchError(this.handleError<DocumentFile>('getDocument'))
+    );
+  }
+
+  getReport(year: number): Observable<any> {
+    return this.http.get(this.documentUrl + "/report" + "?year=" + year).pipe(
+      catchError(this.handleError('getReport', []))
+    );
+  }
+
+  getAllDocuments(): Observable<DocumentInfo[]> {
+    return this.http.get<DocumentInfo[]>(this.documentUrl + "/all").pipe(
+      catchError(this.handleError<DocumentInfo[]>('getAllDocuments', []))
+    );
+  }
+
+  getDocumentsByTag(tag: string): Observable<DocumentInfo[]> {
+    return this.http.get<DocumentInfo[]>(this.documentUrl + "/by_tag?tag=" + tag).pipe(
+      catchError(this.handleError<DocumentInfo[]>('getDocumentsByTag', []))
+    );
+  }
+
+  getDocumentsByYear(year: number): Observable<DocumentInfo[]> {
+    return this.http.get<DocumentInfo[]>(this.documentUrl + "/by_year?year=" + year).pipe(
+      catchError(this.handleError<DocumentInfo[]>('getAllDocumentsByYear', []))
+    );
+  }
+
+  getDocumentsByYearAndTag(year: number, tag: string): Observable<DocumentInfo[]> {
+    return this.http.get<DocumentInfo[]>(this.documentUrl + "/by_year_and_tag?year=" + year + "?tag=" + tag).pipe(
+      catchError(this.handleError<DocumentInfo[]>('getAllDocumentsByYearAndTag', []))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
