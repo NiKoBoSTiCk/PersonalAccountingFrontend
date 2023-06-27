@@ -20,6 +20,11 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { UploadComponent } from './components/upload/upload.component';
+import { DownloadComponent } from './components/download/download.component';
+import { DocumentsComponent } from './components/documents/documents.component';
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -27,6 +32,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     LoginComponent,
     MessageComponent,
     SignupComponent,
+    UploadComponent,
+    DownloadComponent,
+    DocumentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +54,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatButtonModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatIconModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],

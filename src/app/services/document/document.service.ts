@@ -21,8 +21,10 @@ export class DocumentService {
     data.append("docInfo", JSON.stringify(docInfo))
     return this.http.post(this.documentUrl, data, {
         reportProgress: true,
-        responseType: 'text'
-    });
+        observe: 'events'
+    }).pipe(
+      catchError(this.handleError('updateDocument'))
+    );
   }
 
   deleteDocument(id: number): Observable<any>{
@@ -38,7 +40,7 @@ export class DocumentService {
       data.append("docFile", docFile.file, docFile.filename)
     return this.http.put(this.documentUrl, data, {
       reportProgress: true,
-      responseType: 'text'
+      observe: 'events'
     }).pipe(
       catchError(this.handleError('updateDocument'))
     );
