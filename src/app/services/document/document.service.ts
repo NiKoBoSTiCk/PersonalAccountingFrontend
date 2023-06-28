@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import { MessageService } from "../message/message.service";
 import { Observable, of } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { DocumentInfo } from "../../models/documentInfo";
 import { DocumentFile } from "../../models/documentFile";
+import {TokenStorageService} from "../token-storage/token-storage.service";
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,18 @@ export class DocumentService {
 
   private documentUrl = 'http://172.28.175.170:4000/api/documents';
 
-  constructor(private http: HttpClient, private messageService: MessageService) { }
+  constructor(
+    private http: HttpClient,
+    private messageService: MessageService,
+    private tokenStorageService: TokenStorageService
+  ) { }
 
-  addDocument(docInfo: DocumentInfo, docFile: DocumentFile): Observable<any> {
+  addDocument(docInfo: DocumentInfo, docFile: File): Observable<any> {
     const data: FormData = new FormData();
-    data.append("docFile", docFile.file, docFile.filename)
-    data.append("docInfo", JSON.stringify(docInfo))
+    data.append("docInfo", new Blob([JSON.stringify(docInfo)], {type: "application/json"}));
+    data.append("docFile", new Blob([docFile], {type: "multipart/form-data"}))
     return this.http.post(this.documentUrl, data, {
-        reportProgress: true,
-        observe: 'events'
+        headers: new HttpHeaders({'Authorization': 'Bearer ' + this.tokenStorageService.getToken()})
     }).pipe(
       catchError(this.handleError('updateDocument'))
     );

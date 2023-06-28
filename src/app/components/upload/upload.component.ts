@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DocumentService } from "../../services/document/document.service";
 import { TokenStorageService } from "../../services/token-storage/token-storage.service";
 import { DocumentInfo } from "../../models/documentInfo";
-import { DocumentFile } from "../../models/documentFile";
-import { Subscription } from "rxjs";
-import { HttpEventType } from "@angular/common/http";
 
 @Component({
   selector: 'app-upload',
@@ -13,16 +10,15 @@ import { HttpEventType } from "@angular/common/http";
 })
 export class UploadComponent implements OnInit {
   form: any = {
+    filename: null,
     description: null,
     amount: null,
     tag: null,
     year: null,
   };
-  fileName = '';
-  uploadProgress?: number;
-  uploadSub?: Subscription;
   showSpinner = false;
   isLoggedIn = false;
+  isUploaded = false;
 
   constructor(
     private documentService: DocumentService,
@@ -31,35 +27,20 @@ export class UploadComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.showSpinner = true;
-    const file: File = event.target.files[0];
-    let docFile = new DocumentFile(this.fileName, file)
-    const { description, amount, tag, year } = this.form;
-    let docInfo = new DocumentInfo(this.fileName, amount, year, tag, description)
+    const { filename, description, amount, tag, year } = this.form;
+    //TODO controllare i campi del form
+    let docFile: File = event.target.files[0];
+    let docInfo: DocumentInfo = new DocumentInfo(filename, amount, year, tag, description)
     this.documentService.addDocument(docInfo, docFile).subscribe(
-      event => {
-        if (event.type == HttpEventType.UploadProgress) {
-          this.uploadProgress = Math.round(100 * (event.loaded / event.total));
-        }
-      }
+      next => { this.showSpinner = false; this.isUploaded = true;},
+      error => { this.isUploaded = false }
     )
+    //TODO cambiare tipo di subscribe e mostrare eventuali errori
   }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
     }
-  }
-
-  cancelUpload() {
-    if (this.uploadSub != null)
-      this.uploadSub.unsubscribe();
-    this.reset();
-  }
-
-  reset() {
-    // @ts-ignore
-    this.uploadProgress = null;
-    // @ts-ignore
-    this.uploadSub = null;
   }
 }

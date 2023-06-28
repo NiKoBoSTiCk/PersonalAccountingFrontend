@@ -1,26 +1,44 @@
-<input type="file" class="file-input"
-       (change)="onFileSelected($event)" #fileUpload>
 
-<div class="file-upload">
 
-  {{fileName || "No file uploaded yet."}}
+<div class="form">
+  <mat-card *ngIf="isLoggedIn" class="mat-card" color="primary">
 
-  <button mat-mini-fab color="primary" class="upload-btn"
-          (click)="fileUpload.click()">
-    <mat-icon>attach_file</mat-icon>
+    <mat-card-header class="mat-card-header">
+      <mat-card-title>Upload New Document</mat-card-title>
+    </mat-card-header>
 
-  </button>
-
-</div>
-
-<div class="progress">
-
-  <mat-progress-bar class="progress-bar" mode="determinate"
-                    [value]="uploadProgress" *ngIf="uploadProgress">
-
-  </mat-progress-bar>
-
-  <mat-icon class="cancel-upload" (click)="cancelUpload()"
-            *ngIf="uploadProgress">delete_forever</mat-icon>
-
+    <mat-card-content class="mat-card-content"> <form name="form"> <table>
+        <tr> <td>
+          <mat-form-field class="mat-form-field">
+            <input [(ngModel)]="form.filename" matInput name="filename" placeholder="Filename" required type="text">
+          </mat-form-field>
+        </td> </tr>
+        <tr> <td>
+          <mat-form-field class="mat-form-field">
+            <input [(ngModel)]="form.year" matInput name="year" placeholder="Year" required type="number">
+          </mat-form-field>
+        </td> </tr>
+        <tr> <td>
+          <mat-form-field class="mat-form-field">
+            <input [(ngModel)]="form.description" matInput name="description" placeholder="Description" required type="text">
+          </mat-form-field>
+        </td> </tr>
+        <tr> <td>
+          <mat-form-field class="mat-form-field">
+            <input [(ngModel)]="form.amount" matInput name="amount" placeholder="Amount" required type="text">
+          </mat-form-field>
+        </td> </tr>
+        <tr> <td>
+          <mat-form-field class="mat-form-field">
+            <input [(ngModel)]="form.tag" matInput name="tag" placeholder="Tag" required type="text">
+          </mat-form-field>
+        </td> </tr>
+        <tr> <td>
+          <button type="button" mat-raised-button (click)="fileInput.click()" *ngIf="form.filename && form.year && form.description && form.amount && form.tag">Choose File</button>
+          <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+          <mat-spinner [style.display]="showSpinner? 'block' : 'none'"></mat-spinner>
+          <mat-label *ngIf="isUploaded">File uploaded</mat-label>
+        </td> </tr>
+      </table> </form> </mat-card-content>
+  </mat-card>
 </div>
