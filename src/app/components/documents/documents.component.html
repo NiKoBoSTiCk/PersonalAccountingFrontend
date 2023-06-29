@@ -7,6 +7,7 @@
       <button mat-button>Get By Year</button>
       <button mat-button>Get By Year And Tag</button>
       <button mat-button *ngIf="selectedDocument" (click)="downloadDocument()">DOWNLOAD {{selectedDocument.filename}}</button>
+      <button mat-button *ngIf="selectedDocument" (click)="deleteDocument()">DELETE {{selectedDocument.filename}}</button>
     </mat-card-header>
 
     <mat-card-content class="mat-card-content">

@@ -61,4 +61,12 @@ export class DocumentsComponent implements OnInit {
       })
     }
   }
+
+  deleteDocument(): void {
+    if (this.selectedDocument) {
+      this.documentService.deleteDocument(this.selectedDocument.id!!).subscribe({
+        next: (): void => { window.location.reload() }
+      })
+    }
+  }
 }
