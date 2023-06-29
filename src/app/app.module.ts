@@ -11,7 +11,6 @@ import { MatOptionModule } from "@angular/material/core";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { LoginComponent } from "./components/login/login.component";
-import { MessageComponent } from "./components/message/message.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatListModule } from "@angular/material/list";
@@ -29,7 +28,6 @@ import { MatFormFieldModule } from "@angular/material/form-field";
   declarations: [
     AppComponent,
     LoginComponent,
-    MessageComponent,
     SignupComponent,
     UploadComponent,
     DocumentsComponent,

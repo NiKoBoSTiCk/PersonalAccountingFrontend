@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from "rxjs/operators";
-import { MessageService } from "../message/message.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ export class AuthService {
 
   private authUrl = 'http://172.28.175.170:4000/api';
 
-  constructor(private http: HttpClient, private messageService: MessageService) { }
+  constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
 
@@ -42,6 +41,6 @@ export class AuthService {
   }
 
   private log(message: string) {
-    this.messageService.add(`AuthService: ${message}`);
+    console.log(`AuthService: ${message}`);
   }
 }

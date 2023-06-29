@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { MessageService } from "../message/message.service";
 import { Observable, of } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { DocumentInfo } from "../../models/documentInfo";
@@ -14,7 +13,6 @@ export class DocumentService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService,
     private tokenStorageService: TokenStorageService
   ) { }
 
@@ -106,6 +104,6 @@ export class DocumentService {
   }
 
   private log(message: string): void {
-    this.messageService.add(`DocumentService: ${message}`);
+    console.log(`DocumentService: ${message}`);
   }
 }

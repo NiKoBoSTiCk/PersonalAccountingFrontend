@@ -30,7 +30,6 @@ export class DocumentsComponent implements OnInit {
     this.documentService.getAllDocuments().subscribe({
       next: (data: DocumentInfo[]): void => { this.documents = data }
     })
-
   }
 
   getDocumentsByTag(tag: string): void {
@@ -44,19 +43,16 @@ export class DocumentsComponent implements OnInit {
     this.documentService.getDocumentsByYear(year).subscribe({
       next: (data: DocumentInfo[]): void => { this.documents = data }
     })
-
   }
 
   getDocumentsByYearAndTag(year: number, tag: string): void {
     this.documentService.getDocumentsByYearAndTag(year, tag).subscribe({
       next: (data: DocumentInfo[]): void => { this.documents = data }
     })
-
   }
 
   select(doc: any): void {
     this.selectedDocument = doc
-    console.log(this.selectedDocument.id)
   }
 
   downloadDocument(): void {
