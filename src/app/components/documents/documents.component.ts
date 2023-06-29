@@ -36,7 +36,6 @@ export class DocumentsComponent implements OnInit {
     this.documentService.getDocumentsByTag(tag).subscribe({
       next: (data: DocumentInfo[]): void => { this.documents = data }
     })
-
   }
 
   getDocumentsByYear(year: number): void {
