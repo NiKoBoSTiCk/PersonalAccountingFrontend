@@ -1,1 +1,25 @@
-<p>documents works!</p>
+<div class="main-div">
+  <mat-card class="mat-card" *ngIf="isLoggeIn" color="primary">
+    <mat-card-header class="mat-card-header">
+      <mat-card-title>Documents List</mat-card-title>
+      <button mat-button (click)="getDocuments()">Get All</button>
+      <button mat-button>Get By Tag</button>
+      <button mat-button>Get By Year</button>
+      <button mat-button>Get By Year And Tag</button>
+      <button mat-button (click)="downloadDocument()">DOWNLOAD</button>
+    </mat-card-header>
+
+    <mat-card-content class="mat-card-content">
+        <div *ngFor="let doc of this.documents" (click)="select(doc)" class="document-div">
+          <mat-card>
+            <mat-label>filename: {{doc.filename}}</mat-label> <br>
+            <mat-label>tag: {{doc.tag}}</mat-label> <br>
+            <mat-label>year: {{doc.year}}</mat-label> <br>
+            <mat-label>amount: {{doc.amount}}</mat-label> <br>
+            <mat-label>description: {{doc.description}}</mat-label> <br>
+          </mat-card>
+        </div>
+    </mat-card-content>
+
+  </mat-card>
+</div>

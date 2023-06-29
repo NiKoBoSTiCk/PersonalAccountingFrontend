@@ -20,7 +20,6 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule} from "@angular/material/card";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { UploadComponent } from './components/upload/upload.component';
-import { DownloadComponent } from './components/download/download.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatIconModule } from "@angular/material/icon";
@@ -33,7 +32,6 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MessageComponent,
     SignupComponent,
     UploadComponent,
-    DownloadComponent,
     DocumentsComponent,
   ],
   imports: [
@@ -56,7 +54,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

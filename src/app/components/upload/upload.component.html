@@ -1,8 +1,5 @@
-
-
 <div class="form">
   <mat-card *ngIf="isLoggedIn" class="mat-card" color="primary">
-
     <mat-card-header class="mat-card-header">
       <mat-card-title>Upload New Document</mat-card-title>
     </mat-card-header>
@@ -41,4 +38,5 @@
         </td> </tr>
       </table> </form> </mat-card-content>
   </mat-card>
+  <a href [routerLink]="['/documents']"></a>
 </div>

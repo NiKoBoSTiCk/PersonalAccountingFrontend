@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { MessageService } from "../message/message.service";
 import { Observable, of } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { DocumentInfo } from "../../models/documentInfo";
-import { DocumentFile } from "../../models/documentFile";
-import {TokenStorageService} from "../token-storage/token-storage.service";
+import { TokenStorageService } from "../token-storage/token-storage.service";
 
 @Injectable({
   providedIn: 'root'
@@ -48,12 +47,14 @@ export class DocumentService {
     );
   }
 
-  getDocument(id: number): Observable<DocumentFile> {
-    return this.http.get<DocumentFile>(this.documentUrl + "?id=" + id, {
-      headers: new HttpHeaders({'Authorization': 'Bearer ' + this.tokenStorageService.getToken()})
+  getDocument(id: number): Observable<any> {
+    return this.http.get(this.documentUrl + '?id=' + id, {
+      headers: new HttpHeaders({'Authorization': 'Bearer ' + this.tokenStorageService.getToken()}),
+      responseType: "blob"
     }).pipe(
-      catchError(this.handleError<DocumentFile>('getDocument'))
+      catchError(this.handleError('getDocument'))
     );
+
   }
 
   getReport(year: number): Observable<any> {

@@ -6,7 +6,7 @@
     </mat-card-header>
 
     <mat-card-content class="mat-card-content">
-      <form name="form" #f="ngForm"> <table>
+      <form name="form"> <table>
         <tr> <td>
           <mat-form-field class="mat-form-field">
             <input matInput placeholder="Email" [(ngModel)]="form.email" type="email" name="email" required>
@@ -28,11 +28,15 @@
     </div>
 
     <mat-card-actions class="mat-card-actions">
-      <button mat-raised-button (click)="f.form.valid && onSubmit()" color="primary">Login</button>
+      <button (click)="form.email && form.password && onSubmit()" color="primary" mat-raised-button>Login</button>
       <mat-label [routerLink]="['/signup']" color="primary">or Signup</mat-label>
     </mat-card-actions>
 
   </mat-card>
+
+  <div *ngIf="!isLoginFailed && isLoggedIn">
+    <a href [routerLink]="['/documents']"></a>
+  </div>
 </div>
 
 

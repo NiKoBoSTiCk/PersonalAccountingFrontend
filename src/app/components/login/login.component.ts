@@ -13,9 +13,9 @@ export class LoginComponent implements OnInit {
     email: null,
     password: null
   };
-  isLoggedIn = false;
-  isLoginFailed = false;
-  showSpinner = false;
+  isLoggedIn: boolean = false;
+  isLoginFailed: boolean = false;
+  showSpinner: boolean = false;
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
@@ -30,25 +30,25 @@ export class LoginComponent implements OnInit {
     this.showSpinner = true;
     this.isLoginFailed = false;
     this.authService.login(email, password).subscribe({
-        next: (data) => {
-          try {
-            let user = new User(
-              data.token,
-              data.username,
-              data.email,
-              data.tokenType
-            );
-            this.tokenStorage.saveToken(user.token);
-            this.tokenStorage.saveUser(user);
-            this.isLoginFailed = false;
-            this.isLoggedIn = true;
-            window.location.reload();
-            return;
-          } catch (error) {
-            this.isLoginFailed = true;
-            this.showSpinner = false;
-          }
-        }
+      next: (data): void => {
+        let user: User = new User(
+          data.token,
+          data.username,
+          data.email,
+          data.tokenType
+        );
+        this.tokenStorage.saveToken(user.token);
+        this.tokenStorage.saveUser(user);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.showSpinner = false;
+        window.location.reload();
+        return;
+      },
+      error: (): void => {
+        this.isLoginFailed = true;
+        this.showSpinner = false;
+      }
     });
   }
 }

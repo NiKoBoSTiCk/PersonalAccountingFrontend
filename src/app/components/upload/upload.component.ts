@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DocumentService } from "../../services/document/document.service";
 import { TokenStorageService } from "../../services/token-storage/token-storage.service";
 import { DocumentInfo } from "../../models/documentInfo";
+import {error} from "@angular/compiler-cli/src/transformers/util";
+import {MessageService} from "../../services/message/message.service";
 
 @Component({
   selector: 'app-upload',
@@ -16,26 +18,26 @@ export class UploadComponent implements OnInit {
     tag: null,
     year: null,
   };
-  showSpinner = false;
-  isLoggedIn = false;
-  isUploaded = false;
+  showSpinner: boolean = false;
+  isLoggedIn: boolean = false;
+  isUploaded: boolean = false;
 
   constructor(
     private documentService: DocumentService,
+    private messageService: MessageService,
     private tokenStorage: TokenStorageService
   ) {}
 
-  onFileSelected(event: any) {
+  onFileSelected(event: any): void {
     this.showSpinner = true;
     const { filename, description, amount, tag, year } = this.form;
     //TODO controllare i campi del form
     let docFile: File = event.target.files[0];
     let docInfo: DocumentInfo = new DocumentInfo(filename, amount, year, tag, description)
-    this.documentService.addDocument(docInfo, docFile).subscribe(
-      next => { this.showSpinner = false; this.isUploaded = true;},
-      error => { this.isUploaded = false }
-    )
-    //TODO cambiare tipo di subscribe e mostrare eventuali errori
+    this.documentService.addDocument(docInfo, docFile).subscribe( {
+      next: () => { this.showSpinner = false; this.isUploaded = true },
+      error: (err) => { this.isUploaded = true; this.messageService.add(err.toString()) }
+    })
   }
 
   ngOnInit(): void {
