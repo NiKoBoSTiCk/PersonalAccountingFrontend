@@ -1,17 +1,22 @@
 <div id="app">
   <mat-toolbar color="primary">
     <span>Personal Accounting App</span>
-    <div class="spacer"></div>
+    <span class="spacer">
+      <div *ngIf="isLoggedIn">
+        <a mat-button href="/documents" routerLink="documents">My Documents</a>
+        <a mat-button href="/upload" routerLink="upload">Upload</a>
+        <a mat-button href="/report" routerLink="report">Report</a>
+      </div>
+    </span>
     <div *ngIf="!isLoggedIn">
       <a mat-button href="/login" routerLink="login">Login</a>
       <a mat-button href="/signup" routerLink="signup">Signup</a>
     </div>
     <div *ngIf="isLoggedIn">
-      <a mat-button href="/documents" routerLink="documents">My Documents</a>
-      <a mat-button href="/upload" routerLink="upload">Upload</a>
-      <a mat-button href="/report" routerLink="report">Report</a>
-      <a mat-button (click)="logout()">Logout</a>
+      <a mat-button *ngIf="isLoggedIn" (click)="logout()">Logout</a>
     </div>
+
+
   </mat-toolbar>
 
   <div class="container">

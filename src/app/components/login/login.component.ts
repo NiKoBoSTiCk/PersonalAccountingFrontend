@@ -48,7 +48,9 @@ export class LoginComponent implements OnInit {
           this.isLoginFailed = false;
           this.isLoggedIn = true;
           this.showSpinner = false;
-          void this.router.navigate(['/documents'])
+          void this.router.navigate(['/documents']).then((): void => {
+            window.location.reload();
+          });
         }
         catch (e) {
           this.isLoginFailed = true;

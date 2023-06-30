@@ -6,25 +6,25 @@
     </mat-card-header>
 
     <mat-card-content class="mat-card-content">
-      <form name="form" #f="ngForm"> <table>
-        <tr> <td>
-          <mat-form-field class="mat-form-field">
-            <input matInput placeholder="Username" [(ngModel)]="form.username" type="username" name="username" required>
-          </mat-form-field>
-        </td> </tr>
-
-        <tr> <td>
-          <mat-form-field class="mat-form-field">
-            <input matInput placeholder="Email" [(ngModel)]="form.email" type="email" name="email" required>
-          </mat-form-field>
-        </td> </tr>
-
-        <tr> <td>
-          <mat-form-field class="mat-form-field">
-            <input matInput placeholder="Password" [(ngModel)]="form.password" type="password" name="password" required>
-          </mat-form-field>
-        </td> </tr>
-      </table> </form>
+      <form name="form" #f="ngForm">
+        <table>
+         <tr> <td>
+           <mat-form-field class="mat-form-field">
+              <input matInput placeholder="Username" [(ngModel)]="form.username" minlength="8" type="username" name="username" required>
+           </mat-form-field>
+         </td> </tr>
+         <tr> <td>
+           <mat-form-field class="mat-form-field">
+             <input matInput placeholder="Email" [(ngModel)]="form.email" email type="email" name="email" required>
+           </mat-form-field>
+         </td> </tr>
+          <tr> <td>
+            <mat-form-field class="mat-form-field">
+              <input matInput placeholder="Password" [(ngModel)]="form.password" minlength="8" type="password" name="password" required>
+           </mat-form-field>
+          </td> </tr>
+        </table>
+      </form>
 
       <mat-spinner [style.display]="showSpinner? 'block' : 'none'"></mat-spinner>
 

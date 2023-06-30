@@ -7,14 +7,13 @@ import { TokenStorageService } from "./services/token-storage/token-storage.serv
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  isLoggedIn = false;
+  isLoggedIn: boolean = false;
   username?: string;
 
   constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.username = user.username;

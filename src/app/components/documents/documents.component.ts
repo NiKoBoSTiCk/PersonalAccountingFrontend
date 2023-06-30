@@ -48,8 +48,8 @@ export class DocumentsComponent implements OnInit {
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggeIn = true;
-      this.getDocuments();
     }
+    this.getDocuments()
   }
 
   getDocuments(): void {

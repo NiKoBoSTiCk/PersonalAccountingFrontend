@@ -16,9 +16,9 @@ export class SignupComponent implements OnInit {
     email: null,
     password: null
   };
-  isLoggedIn = false;
-  isSignupFailed = false;
-  showSpinner = false;
+  isLoggedIn: boolean = false;
+  isSignupFailed: boolean = false;
+  showSpinner: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -49,7 +49,9 @@ export class SignupComponent implements OnInit {
         this.isSignupFailed = false;
         this.isLoggedIn = true;
         this.showSpinner = false;
-        void this.router.navigate(['/documents'])
+        void this.router.navigate(['/documents']).then((): void => {
+          window.location.reload();
+        });
       },
       error: (): void => {
         this.isSignupFailed = true;
