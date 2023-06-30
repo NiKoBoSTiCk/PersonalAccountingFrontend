@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Select a tag and a year</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Tag</mat-label>
+    <mat-select [(value)]="data.tag">
+      <mat-option *ngFor="let t of data.tagList" [value]="t">{{t}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Year</mat-label>
+    <input matInput [(ngModel)]="data.year" type="number" [max]=this.MAX_YEAR [min]="1950">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button *ngIf="(data.year>=1950 && data.year<=this.MAX_YEAR) || data.year==undefined">Ok</button>
+</div>

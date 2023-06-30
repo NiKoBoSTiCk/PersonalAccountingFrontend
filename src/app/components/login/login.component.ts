@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { TokenStorageService } from '../../services/token-storage/token-storage.service';
 import { User } from "../../models/user";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -36,22 +36,25 @@ export class LoginComponent implements OnInit {
     this.isLoginFailed = false;
     this.authService.login(email, password).subscribe({
       next: (data): void => {
-        let user: User = new User(
-          data.token,
-          data.username,
-          data.email,
-          data.tokenType
-        );
-        this.tokenStorage.saveToken(user.token);
-        this.tokenStorage.saveUser(user);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.showSpinner = false;
-        void this.router.navigate(['/documents'])
-      },
-      error: (): void => {
-        this.isLoginFailed = true;
-        this.showSpinner = false;
+        try {
+          let user: User = new User(
+            data.token,
+            data.username,
+            data.email,
+            data.tokenType
+          );
+          this.tokenStorage.saveToken(user.token);
+          this.tokenStorage.saveUser(user);
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+          this.showSpinner = false;
+          void this.router.navigate(['/documents'])
+        }
+        catch (e) {
+          this.isLoginFailed = true;
+          this.isLoggedIn = false;
+          this.showSpinner = false;
+        }
       }
     });
   }

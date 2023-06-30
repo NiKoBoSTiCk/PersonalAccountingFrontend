@@ -23,6 +23,8 @@ import { DocumentsComponent } from './components/documents/documents.component';
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { ReportComponent } from './components/report/report.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     SignupComponent,
     UploadComponent,
     DocumentsComponent,
+    ReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatProgressBarModule,
     MatIconModule,
     MatInputModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

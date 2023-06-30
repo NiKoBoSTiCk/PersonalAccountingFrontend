@@ -1,37 +1,35 @@
-<div class="main-div">
-  <mat-card *ngIf="!isLoggedIn" class="mat-card" color="primary">
-
+<div class="main-div" >
+  <mat-card class="mat-card" *ngIf="!isLoggedIn" color="primary">
     <mat-card-header class="mat-card-header">
       <mat-card-title>Login</mat-card-title>
     </mat-card-header>
-
     <mat-card-content class="mat-card-content">
-      <form name="form"> <table>
-        <tr> <td>
-          <mat-form-field class="mat-form-field">
-            <input matInput placeholder="Email" [(ngModel)]="form.email" type="email" name="email" required>
-          </mat-form-field>
-        </td> </tr>
+      <form name="form">
+        <table>
+          <tr><td>
+            <mat-form-field class="mat-form-field">
+              <input matInput placeholder="Email" [(ngModel)]="form.email" name="email" type="email" email required>
+            </mat-form-field>
+          </td></tr>
 
-        <tr> <td>
-          <mat-form-field class="mat-form-field">
-            <input matInput placeholder="Password" [(ngModel)]="form.password" type="password" name="password" required>
-          </mat-form-field>
-        </td> </tr>
-      </table> </form>
+          <tr><td>
+            <mat-form-field class="mat-form-field">
+              <input matInput placeholder="Password" [(ngModel)]="form.password" name="password" type="password" required>
+            </mat-form-field>
+          </td></tr>
 
+        </table>
+
+      </form>
       <mat-spinner [style.display]="showSpinner? 'block' : 'none'"></mat-spinner>
     </mat-card-content>
-
     <div *ngIf="isLoginFailed && !isLoggedIn">
       Login Failed!
     </div>
-
     <mat-card-actions class="mat-card-actions">
       <button (click)="form.email && form.password && onSubmit()" color="primary" mat-raised-button>Login</button>
-      <mat-label [routerLink]="['/signup']" color="primary">or Signup</mat-label>
+      <mat-label [routerLink]="['/signup']">or Signup</mat-label>
     </mat-card-actions>
-
   </mat-card>
 </div>
 

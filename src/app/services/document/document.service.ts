@@ -41,7 +41,9 @@ export class DocumentService {
     data.append("docInfo", new Blob([JSON.stringify(docInfo)], {type: "application/json"}));
     if (docFile != null)
       data.append("docFile", new Blob([docFile], {type: "multipart/form-data"}))
-    return this.http.put(this.documentUrl, data, {
+    else
+      data.append("docFile", new Blob([], {type: "multipart/form-data"}))
+    return this.http.put(this.documentUrl + '?id=' + docInfo.id, data, {
       headers: new HttpHeaders({'Authorization': this.user.tokenType + ' ' + this.user.token}),
     }).pipe(
       catchError(this.handleError('updateDocument'))
@@ -91,7 +93,7 @@ export class DocumentService {
   }
 
   getDocumentsByYearAndTag(year: number, tag: string): Observable<DocumentInfo[]> {
-    return this.http.get<DocumentInfo[]>(this.documentUrl + "/by_year_and_tag?year=" + year + "?tag=" + tag, {
+    return this.http.get<DocumentInfo[]>(this.documentUrl + "/by_year_and_tag?year=" + year + "&tag=" + tag, {
       headers: new HttpHeaders({'Authorization': this.user.tokenType + ' ' + this.user.token}),
     }).pipe(
       catchError(this.handleError<DocumentInfo[]>('getAllDocumentsByYearAndTag', []))

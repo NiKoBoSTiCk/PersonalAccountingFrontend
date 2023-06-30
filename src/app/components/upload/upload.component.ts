@@ -20,6 +20,9 @@ export class UploadComponent implements OnInit {
   showSpinner: boolean = false;
   isLoggedIn: boolean = false;
   isUploaded: boolean = false;
+  MAX_YEAR: number = new Date().getFullYear()
+  tagList: string[] = ['Alimentari', 'Scuola', 'Finanza', 'Trasporti', 'Utenze', 'Assicurazioni', 'Sport',
+    'Salute', 'Ristoranti', 'Cultura', 'Casa', 'Abbigliamento', 'Altro']
 
   constructor(
     private documentService: DocumentService,
@@ -30,7 +33,6 @@ export class UploadComponent implements OnInit {
   onFileSelected(event: any): void {
     this.showSpinner = true;
     const { filename, description, amount, tag, year } = this.form;
-    //TODO controllare i campi del form
     let docFile: File = event.target.files[0];
     let docInfo: DocumentInfo = new DocumentInfo(filename, amount, year, tag, description)
     this.documentService.addDocument(docInfo, docFile).subscribe( {

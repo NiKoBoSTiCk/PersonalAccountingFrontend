@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Update Document</h1>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>Filename</mat-label>
+      <input matInput [(ngModel)]="data.filename" type="text" pattern="^[_A-Za-z0-9]{3,}\.(?:pdf|doc|docx)$" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Amount</mat-label>
+      <input matInput [(ngModel)]="data.amount" type="number" [min]="0" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tag</mat-label>
+      <mat-select [(value)]="data.tag">
+        <mat-option *ngFor="let t of data.tagList" [value]="t">{{t}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Year</mat-label>
+      <input matInput [(ngModel)]="data.year" type="number" [max]=this.MAX_YEAR [min]="1950">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput [(ngModel)]="data.description" type="text">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button
+          *ngIf="data.filename.match('^[_A-Za-z0-9]{3,}\\.(?:pdf|doc|docx)$') &&
+           data.amount>0 && data.year>=1950 && data.year<=this.MAX_YEAR && data.description"
+          [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>
