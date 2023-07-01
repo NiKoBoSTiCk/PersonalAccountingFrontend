@@ -1,42 +1,36 @@
 <div class="main-div">
-  <mat-card *ngIf="!isLoggedIn" class="mat-card" color="primary">
-
-    <mat-card-header class="mat-card-header">
+  <mat-card *ngIf="!isLoggedIn">
+    <mat-card-header>
       <mat-card-title>Signup</mat-card-title>
     </mat-card-header>
-
-    <mat-card-content class="mat-card-content">
+    <mat-card-content>
       <form name="form" #f="ngForm">
         <table>
          <tr> <td>
-           <mat-form-field class="mat-form-field">
+           <mat-form-field>
               <input matInput placeholder="Username" [(ngModel)]="form.username" minlength="8" type="username" name="username" required>
            </mat-form-field>
          </td> </tr>
          <tr> <td>
-           <mat-form-field class="mat-form-field">
+           <mat-form-field>
              <input matInput placeholder="Email" [(ngModel)]="form.email" email type="email" name="email" required>
            </mat-form-field>
          </td> </tr>
           <tr> <td>
-            <mat-form-field class="mat-form-field">
+            <mat-form-field>
               <input matInput placeholder="Password" [(ngModel)]="form.password" minlength="8" type="password" name="password" required>
            </mat-form-field>
           </td> </tr>
         </table>
       </form>
-
       <mat-spinner [style.display]="showSpinner? 'block' : 'none'"></mat-spinner>
-
     </mat-card-content>
-
     <div *ngIf="isSignupFailed">
       Signup Failed!
     </div>
-
-    <mat-card-actions class="mat-card-actions">
+    <mat-card-actions>
       <button mat-raised-button (click)="f.form.valid && onSubmit()" color="primary">Signup</button>
-      <mat-label [routerLink]="['/login']" color="primary">or Login</mat-label>
+      <mat-label [routerLink]="['/login']">or Login</mat-label>
     </mat-card-actions>
   </mat-card>
 </div>

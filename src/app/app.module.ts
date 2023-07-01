@@ -56,7 +56,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatProgressBarModule,
     MatIconModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

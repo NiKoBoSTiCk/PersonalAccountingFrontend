@@ -1,0 +1,17 @@
+.main-div {
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.mat-card {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-card-header {
+  margin-top: 20px;
+  margin-left: 40%;
+  align-content: center;
+}
+

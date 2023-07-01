@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Select a tag and a year</h1>
+<h1 mat-dialog-title>Search By</h1>
 <div mat-dialog-content>
   <mat-form-field>
     <mat-label>Tag</mat-label>
@@ -13,5 +13,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button *ngIf="(data.year>=1950 && data.year<=this.MAX_YEAR) || data.year==undefined">Ok</button>
+  <button mat-button *ngIf="(data.year>=1950 && data.year<=this.MAX_YEAR) || data.year==undefined" [mat-dialog-close]="data">Ok</button>
 </div>

@@ -1,44 +1,51 @@
 <div class="main-div">
   <mat-card *ngIf="isLoggedIn" class="mat-card">
     <mat-card-header class="mat-card-header">
-      <mat-card-title>Upload New Document</mat-card-title>
+      <mat-card-title>Upload</mat-card-title>
     </mat-card-header>
 
     <mat-card-content class="mat-card-content">
       <form>
-        <mat-form-field class="mat-form-field">
-          <mat-label>Filename</mat-label>
-          <input [(ngModel)]="form.filename" matInput name="filename" required type="text" pattern="^[_A-Za-z0-9]{3,}\.(?:pdf|doc|docx)$">
-        </mat-form-field>
-
-        <mat-form-field class="mat-form-field">
-          <mat-label>Tag</mat-label>
-          <mat-select [(value)]="form.tag">
-            <mat-option *ngFor="let t of tagList" [value]="t">{{t}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field class="mat-form-field">
-          <mat-label>Year</mat-label>
-          <input [(ngModel)]="form.year" matInput name="year" required type="number" [max]=this.MAX_YEAR [min]="1950">
-        </mat-form-field>
-
-        <mat-form-field class="mat-form-field">
-          <mat-label>Amount</mat-label>
-          <input [(ngModel)]="form.amount" matInput name="amount" required type="text" [min]="0">
-        </mat-form-field>
-
-        <mat-form-field class="mat-form-field">
-          <mat-label>Description</mat-label>
-          <input [(ngModel)]="form.description" matInput name="description" required type="text">
-        </mat-form-field>
-
-        <button type="button" mat-button (click)="fileInput.click()"
-                *ngIf="form.description && form.filename.match('^[_A-Za-z0-9]{3,}\\.(?:pdf|doc|docx)$') &&
+        <table>
+          <tr><td>
+            <mat-form-field class="mat-form-field">
+              <mat-label>Filename</mat-label>
+              <input [(ngModel)]="form.filename" matInput name="filename" required type="text" pattern="^[_A-Za-z0-9]{3,}\.(?:pdf|doc|docx)$">
+            </mat-form-field>
+          </td></tr>
+          <tr><td>
+            <mat-form-field class="mat-form-field">
+              <mat-label>Tag</mat-label>
+              <mat-select [(value)]="form.tag">
+                <mat-option *ngFor="let t of tagList" [value]="t">{{t}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td></tr>
+            <mat-form-field class="mat-form-field">
+              <mat-label>Year</mat-label>
+              <input [(ngModel)]="form.year" matInput name="year" required type="number" [max]=this.MAX_YEAR [min]="1950">
+            </mat-form-field>
+          <tr><td>
+            <mat-form-field class="mat-form-field">
+              <mat-label>Amount</mat-label>
+              <input [(ngModel)]="form.amount" matInput name="amount" required type="text" [min]="0">
+            </mat-form-field>
+          </td></tr>
+          <tr><td>
+            <mat-form-field class="mat-form-field">
+              <mat-label>Description</mat-label>
+              <input [(ngModel)]="form.description" matInput name="description" required type="text">
+            </mat-form-field>
+          </td></tr>
+          <tr><td>
+            <button type="button" mat-button (click)="fileInput.click()"
+                    *ngIf="form.description && form.filename.match('^[_A-Za-z0-9]{3,}\\.(?:pdf|doc|docx)$') &&
                 form.amount>0 && form.year>=1950 && form.year<=this.MAX_YEAR">Choose File</button>
-        <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
-        <mat-spinner [style.display]="showSpinner? 'block' : 'none'"></mat-spinner>
-        <mat-label *ngIf="isUploaded">File uploaded</mat-label>
+            <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+            <mat-spinner [style.display]="showSpinner? 'block' : 'none'"></mat-spinner>
+            <mat-label *ngIf="isUploaded">File uploaded</mat-label>
+          </td></tr>
+        </table>
       </form>
     </mat-card-content>
   </mat-card>

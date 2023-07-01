@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'documents', component: DocumentsComponent },
   { path: 'upload', component: UploadComponent },
   { path: 'report', component: ReportComponent },
-  { path: '**', redirectTo: 'documents', pathMatch: 'full' }
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -1,0 +1,21 @@
+.main-div {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-card {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+
+.mat-card-header {
+  margin-top: 20px;
+}
+
+.mat-card-content {
+  margin-top: 30px;
+}
+

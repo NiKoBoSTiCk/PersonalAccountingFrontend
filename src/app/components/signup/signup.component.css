@@ -1,11 +1,7 @@
-.main-div{
-  top:20%;
-  width:100%;
-  text-align:center;
-  position:fixed;
+.main-div {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.mat-card{
-  margin:0 auto;
-  display:inline-block;
-}

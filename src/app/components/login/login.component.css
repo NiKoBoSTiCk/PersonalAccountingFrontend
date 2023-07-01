@@ -1,11 +1,28 @@
-.main-div{
-  top:20%;
-  width:100%;
-  text-align:center;
-  position:fixed;
+.main-div {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.mat-card{
-  margin:0 auto;
-  display:inline-block;
+.space_btn {
+  margin: 10px;
+}
+
+.space_label {
+  margin-left: 70px;
+}
+
+.mat-card {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+}
+
+.mat-card-header {
+  margin-top: 20px;
+}
+
+.mat-card-content {
+  margin-top: 30px;
 }
