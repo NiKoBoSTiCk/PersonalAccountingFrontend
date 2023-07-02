@@ -41,7 +41,7 @@
             <button type="button" mat-button (click)="fileInput.click()"
                     *ngIf="form.description && form.filename.match('^[_A-Za-z0-9]{3,}\\.(?:pdf|doc|docx)$') &&
                 form.amount>0 && form.year>=1950 && form.year<=this.MAX_YEAR">Choose File</button>
-            <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+            <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file" accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document">
             <mat-spinner [style.display]="showSpinner? 'block' : 'none'"></mat-spinner>
             <mat-label *ngIf="isUploaded">File uploaded</mat-label>
           </td></tr>

@@ -35,16 +35,19 @@ export class UploadComponent implements OnInit {
     const { filename, description, amount, tag, year } = this.form;
     let docFile: File = event.target.files[0];
     let docInfo: DocumentInfo = new DocumentInfo(filename, amount, year, tag, description)
-    this.documentService.addDocument(docInfo, docFile).subscribe( {
-      next: (): void => {
-        this.showSpinner = false;
-        this.isUploaded = true;
-        void this.router.navigate(['/documents'])
-      },
-      error: (): void => {
-        this.isUploaded = false
-      }
-    })
+    try {
+      this.documentService.addDocument(docInfo, docFile).subscribe( {
+        next: (): void => {
+          this.showSpinner = false;
+          this.isUploaded = true;
+          void this.router.navigate(['/documents'])
+        }
+      })
+    }
+    catch (e) {
+      this.showSpinner = false;
+      this.isUploaded = false;
+    }
   }
 
   ngOnInit(): void {
