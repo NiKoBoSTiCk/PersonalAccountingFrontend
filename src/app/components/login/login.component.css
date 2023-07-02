@@ -15,8 +15,8 @@
 
 .mat-card {
   display: flex;
-  justify-content: center; /* align horizontal */
-  align-items: center; /* align vertical */
+  justify-content: center;
+  align-items: center;
 }
 
 .mat-card-header {

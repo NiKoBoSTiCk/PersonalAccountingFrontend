@@ -38,24 +38,27 @@ export class SignupComponent implements OnInit {
     this.isSignupFailed = false;
     this.authService.signup(username, email, password).subscribe({
       next: (data): void => {
-        let user: User = new User(
-          data.token,
-          data.username,
-          data.email,
-          data.tokenType
-        );
-        this.tokenStorage.saveToken(user.token);
-        this.tokenStorage.saveUser(user);
-        this.isSignupFailed = false;
-        this.isLoggedIn = true;
-        this.showSpinner = false;
-        void this.router.navigate(['/documents']).then((): void => {
-          window.location.reload();
-        });
-      },
-      error: (): void => {
-        this.isSignupFailed = true;
-        this.showSpinner = false;
+        try {
+          let user: User = new User(
+            data.token,
+            data.username,
+            data.email,
+            data.tokenType
+          );
+          this.tokenStorage.saveToken(user.token);
+          this.tokenStorage.saveUser(user);
+          this.isSignupFailed = false;
+          this.isLoggedIn = true;
+          this.showSpinner = false;
+          void this.router.navigate(['/documents']).then((): void => {
+            window.location.reload();
+          });
+        }
+        catch (e) {
+          this.isSignupFailed = true;
+          this.isLoggedIn = false;
+          this.showSpinner = false;
+        }
       }
     });
   }

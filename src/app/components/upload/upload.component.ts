@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DocumentService } from "../../services/document/document.service";
 import { TokenStorageService } from "../../services/token-storage/token-storage.service";
 import { DocumentInfo } from "../../models/documentInfo";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-upload',

@@ -10,7 +10,7 @@ import { User } from "../../models/user";
   providedIn: 'root'
 })
 export class DocumentService {
-  private documentUrl: string = 'http://172.28.175.170:4000/api/documents';
+  private documentUrl: string = 'http://localhost:4000/api/documents';
   private user: User
 
   constructor(private http: HttpClient, private tokenStorageService: TokenStorageService) {

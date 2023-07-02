@@ -8,7 +8,7 @@ import { catchError } from "rxjs/operators";
 })
 export class AuthService {
 
-  private authUrl = 'http://172.28.175.170:4000/api';
+  private authUrl = 'http://localhost:4000/api';
 
   constructor(private http: HttpClient) { }
 
