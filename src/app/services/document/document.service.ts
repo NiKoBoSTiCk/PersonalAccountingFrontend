@@ -22,7 +22,8 @@ export class DocumentService {
     data.append("docInfo", new Blob([JSON.stringify(docInfo)], {type: "application/json"}));
     data.append("docFile", new Blob([docFile], {type: "multipart/form-data"}))
     return this.http.post(this.documentUrl, data, {
-        headers: new HttpHeaders({'Authorization': this.user.tokenType + ' ' + this.user.token})
+        headers: new HttpHeaders({'Authorization': this.user.tokenType + ' ' + this.user.token}),
+        responseType: "text"
     }).pipe(
       catchError(this.handleError('updateDocument'))
     );
